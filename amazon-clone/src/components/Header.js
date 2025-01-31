@@ -4,8 +4,11 @@ import logo from "../images/logo.png";
 import search from "../Icones/searchIcon.png";
 import basket from "../Icones/shopping-cart.png";
 import "./Header.css";
+import { useAuth } from "../context/GlobalState";
 
 const Header = () => {
+  const { user } = useAuth();
+  console.log(user?.email);
   return (
     <div className="header">
       <Link to="/">
@@ -18,7 +21,7 @@ const Header = () => {
       <div className="header-nav">
         <Link to="/login">
           <div className="header-option">
-            <div className="header-optionLineOne">hello guest</div>
+            <div className="header-optionLineOne">hello {user? user.email : "guest"}</div>
             <div className="header-optionLineTwo">Sing IN </div>
           </div>
         </Link>
