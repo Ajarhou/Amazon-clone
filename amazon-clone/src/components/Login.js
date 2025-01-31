@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import "./login.css";
 import { useAuth } from "../context/GlobalState";
@@ -11,20 +11,37 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const register = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password).then((auth)=>{
-      if(auth){
-        navigate('/');
-
-      }
-    }).catch((error)=>{
-      alert(error.message);
-    })
-  };
-  console.log(user);
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+
+  const signIn = (e)=>{
+    e.preventDefault();
+    signInWithEmailAndPassword(auth,email,password).then((auth)=>{
+      if(auth){
+        navigate("/");
+      }
+    }).catch((error)=>{
+      alert(error.message)
+    });
+
+
+  }
+  const register = (e) => {
+    e.preventDefault();
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((auth) => {
+        if (auth) {
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  };
+  console.log(user);
+ 
 
   return (
     <div className="login">
@@ -46,7 +63,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="login-signInBtn">Sing in</button>
+          <button className="login-signInBtn" onClick={signIn}>Sign in</button>
           <p>
             by continuing, you agree to AMazon's FAke clone conditions of use
             and Privacy Notice

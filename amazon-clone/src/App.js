@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import { useAuth } from "./context/GlobalState";
 import { auth } from "./firebase";
+import Home from "./components/Home";
 
 const App = () => {
   const { dispatch } = useAuth();
@@ -25,7 +26,13 @@ const App = () => {
   return (
     <div className="app">
       <Routes>
-        <Route path="/" element={<Header />} />
+        <Route path="/" element={
+          <>
+          <Header />
+          <Home/>
+          </>
+          
+          } />
         <Route path="/login" element={<Login />} />
 
         <Route path="*" element={<h1>page note found</h1>} />

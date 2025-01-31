@@ -5,10 +5,13 @@ import search from "../Icones/searchIcon.png";
 import basket from "../Icones/shopping-cart.png";
 import "./Header.css";
 import { useAuth } from "../context/GlobalState";
+import { auth } from "../firebase";
 
 const Header = () => {
   const { user } = useAuth();
-  console.log(user?.email);
+  const handleAuthentification = () => {
+    auth.signOut();
+  };
   return (
     <div className="header">
       <Link to="/">
@@ -19,10 +22,14 @@ const Header = () => {
         <img className="header-searchIcon" src={search} alt="search-image" />
       </div>
       <div className="header-nav">
-        <Link to="/login">
-          <div className="header-option">
-            <div className="header-optionLineOne">hello {user? user.email : "guest"}</div>
-            <div className="header-optionLineTwo">Sing IN </div>
+        <Link to={!user && "/login"}>
+          <div className="header-option" onClick={handleAuthentification}>
+            <div className="header-optionLineOne">
+              hello {user ? user.email : "guest"}
+            </div>
+            <div className="header-optionLineTwo">
+              {user ? "Sign Out" : "Sign In"}
+            </div>
           </div>
         </Link>
 
@@ -39,11 +46,8 @@ const Header = () => {
         </div>
         <Link to="/checkout">
           <div className="header-optionBasket">
-             <img src={basket} alt=""/>
-            <span className="header-optionLineTwo header-basketCount">
-               5
-            </span>
-            
+            <img src={basket} alt="" />
+            <span className="header-optionLineTwo header-basketCount">5</span>
           </div>
         </Link>
       </div>
