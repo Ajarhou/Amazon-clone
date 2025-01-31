@@ -2,13 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
 import search from "../Icones/searchIcon.png";
-import basket from "../Icones/shopping-cart.png";
+import baskets from "../Icones/shopping-cart.png";
 import "./Header.css";
 import { useAuth } from "../context/GlobalState";
 import { auth } from "../firebase";
 
 const Header = () => {
-  const { user } = useAuth();
+  const { user,basket } = useAuth();
   const handleAuthentification = () => {
     auth.signOut();
   };
@@ -46,8 +46,8 @@ const Header = () => {
         </div>
         <Link to="/checkout">
           <div className="header-optionBasket">
-            <img src={basket} alt="" />
-            <span className="header-optionLineTwo header-basketCount">5</span>
+            <img src={baskets} alt="" />
+            <span className="header-optionLineTwo header-basketCount">{basket?.length}</span>
           </div>
         </Link>
       </div>
