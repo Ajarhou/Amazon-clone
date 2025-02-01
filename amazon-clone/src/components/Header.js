@@ -8,9 +8,10 @@ import { useAuth } from "../context/GlobalState";
 import { auth } from "../firebase";
 
 const Header = () => {
-  const { user,basket } = useAuth();
+  const { user,basket} = useAuth();
   const handleAuthentification = () => {
     auth.signOut();
+   
   };
   return (
     <div className="header">
@@ -22,7 +23,7 @@ const Header = () => {
         <img className="header-searchIcon" src={search} alt="search-image" />
       </div>
       <div className="header-nav">
-        <Link to={!user && "/login"}>
+        <Link to= {!user && "/login"}>
           <div className="header-option" onClick={handleAuthentification}>
             <div className="header-optionLineOne">
               hello {user ? user.email : "guest"}

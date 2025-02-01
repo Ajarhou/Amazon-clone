@@ -3,6 +3,8 @@ import checkoutAd from "../images/checkoutAd.jpg";
 import "./Checkout.css";
 import { useAuth } from "../context/GlobalState";
 import CheckoutProduct from "./CheckoutProduct";
+import Subtotal from "./Subtotal";
+
 
 const Checkout = () => {
   const { user, basket } = useAuth();
@@ -24,6 +26,10 @@ const Checkout = () => {
             />
           ))}
         </div>
+      </div>
+      <div className="checkout-right">
+        <Subtotal/>
+
       </div>
     </div>
   );
