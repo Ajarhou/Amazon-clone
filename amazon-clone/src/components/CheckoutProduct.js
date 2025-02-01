@@ -1,8 +1,17 @@
 import React from "react";
+import { useAuth } from "../context/GlobalState";
+
 import "./CheckoutProduct.css";
 import stars from "../Icones/star.png";
 
 const CheckoutProduct = ({ id, image, title, price, rating }) => {
+  const {dispatch} = useAuth();
+  const removeProduct = () => {
+    dispatch({
+      type: "REMOVE_FROM_BASKET",
+      id: id,
+    });
+  };
   return (
     <div className="checkoutProduct">
       <img src={image} className="checkoutProduct-image" />
@@ -21,7 +30,7 @@ const CheckoutProduct = ({ id, image, title, price, rating }) => {
               </p>
             ))}
         </div>
-        <button>Remove from Basket</button>
+        <button onClick={removeProduct}>Remove from Basket</button>
       </div>
     </div>
   );

@@ -16,6 +16,13 @@ const AppReducer = (state = initialState, action) => {
         ...state,
         basket: [...state.basket, action.item],
       };
+    case "REMOVE_FROM_BASKET":
+      const newBasketCopie = [...state.basket];
+      const newBasket = newBasketCopie.filter((item) => item.id !== action.id);
+      return {
+        ...state,
+        basket: newBasket,
+      };
     default:
       return state;
   }
