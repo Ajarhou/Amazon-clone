@@ -1,5 +1,5 @@
 /* eslint-disable no-unreachable */
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
 import { createUserWithEmailAndPassword,signInWithEmailAndPassword } from "firebase/auth";
@@ -9,11 +9,11 @@ import { useAuth } from "../context/GlobalState";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { user } = useAuth();
+  const { user,email,password,dispatch } = useAuth();
   const navigate = useNavigate();
   
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
 
   const signIn = (e)=>{
@@ -55,13 +55,23 @@ const Login = () => {
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) =>
+              dispatch({
+                type:"UPDATE_EMAIL",
+                email:e.target.value,
+              })
+               }
           />
           <h5>Password</h5>
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) =>
+              dispatch({
+                type:"UPDATE_PASSWORD",
+                password:e.target.value,
+              })
+               }
           />
           <button className="login-signInBtn" onClick={signIn}>Sign in</button>
           <p>

@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Login from "./components/Login";
@@ -8,7 +8,7 @@ import Home from "./components/Home";
 import Checkout from "./components/Checkout";
 
 const App = () => {
-  const { dispatch } = useAuth();
+  const { dispatch,user } = useAuth();
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
