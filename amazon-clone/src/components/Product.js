@@ -4,8 +4,10 @@ import star from "../Icones/star.png";
 import { useAuth } from "../context/GlobalState";
 
 const Product = ({ id, image, price, title, rating }) => {
-  const { dispatch } = useAuth();
+  const { dispatch,user } = useAuth();
   const addToBasket = () => {
+    user ?
+
     dispatch({
       type: "ADD_TO_BASKET",
       item: {
@@ -15,7 +17,7 @@ const Product = ({ id, image, price, title, rating }) => {
         price: price,
         rating: rating,
       },
-    });
+    }) :  alert("you should be conect for doing this action");
   };
   return (
     <div className="product">

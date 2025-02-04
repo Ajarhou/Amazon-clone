@@ -7,10 +7,12 @@ import stars from "../Icones/star.png";
 const CheckoutProduct = ({ id, image, title, price, rating }) => {
   const { dispatch } = useAuth();
   const removeProduct = () => {
+   
+
     dispatch({
       type: "REMOVE_FROM_BASKET",
       id: id,
-    });
+    }) ;
   };
   return (
     <div className="checkoutProduct">
