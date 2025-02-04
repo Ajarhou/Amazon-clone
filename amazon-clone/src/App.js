@@ -27,6 +27,7 @@ const App = () => {
   return (
     <div className="app">
       <Routes>
+        
         <Route
           path="/"
           element={
@@ -37,7 +38,7 @@ const App = () => {
           }
         />
         <Route path="/login" element={<Login />} />
-        <Route
+        {user && ( <Route
           path="/checkout"
           element={
             <>
@@ -46,6 +47,9 @@ const App = () => {
             </>
           }
         />
+
+        )}
+       
 
         <Route path="*" element={<h1>page note found</h1>} />
       </Routes>
